@@ -7,6 +7,6 @@ namespace ZingMp3.Data
 {
     public class StaticData
     {
-        public static string htmlString = "";
+        public static string HtmlString = "";
     }
 }

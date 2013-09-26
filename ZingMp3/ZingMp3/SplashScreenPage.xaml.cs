@@ -26,7 +26,7 @@ namespace ZingMp3
 
         async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            StaticData.htmlString = await StaticMethod.GetHttpAsStringGZipAware("http://mp3.zing.vn/");
+            StaticData.HtmlString = await StaticMethod.GetHttpAsStringGZipAware("http://mp3.zing.vn/");
             NavigationService.Navigate(new Uri("/PageGroups/MainGroup/MainPage.xaml", UriKind.Relative));
         }
     }
