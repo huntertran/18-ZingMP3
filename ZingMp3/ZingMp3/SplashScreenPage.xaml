@@ -8,7 +8,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-	xmlns:Huyn="clr-namespace:Huyn;assembly=Huyn.PageRotation"
+	xmlns:huyn="clr-namespace:Huyn;assembly=Huyn.PageRotation"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,7 +17,7 @@
 	shell:SystemTray.IsVisible="False">
 
 	<i:Interaction.Behaviors>
-		<Huyn:PageRotationBehavior/>
+		<huyn:PageRotationBehavior/>
 	</i:Interaction.Behaviors>
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
@@ -29,8 +29,7 @@
 		</Grid.RowDefinitions>
 
 		<ContentPresenter ContentTemplate="{StaticResource AppBackgroundTemplate}"
-						  Grid.RowSpan="2"
-						  />
+						  Grid.RowSpan="2"/>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1">
 			<StackPanel VerticalAlignment="Center">
