@@ -33,8 +33,18 @@
 
 		<Grid x:Name="ContentPanel" Grid.Row="1">
 			<StackPanel VerticalAlignment="Center">
-				<TextBlock Text="Zing MP3"
-						   FontSize="48" TextAlignment="Center"/>
+				<StackPanel>
+					<Image Source="/Assets/Logo/Logo.png" RenderTransformOrigin="0.5,0.5">
+						<Image.RenderTransform>
+							<CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
+						</Image.RenderTransform>
+					</Image>
+					<TextBlock Text="Đỉnh cao âm nhạc"
+							   FontSize="30"
+							   HorizontalAlignment="Center"/>
+				</StackPanel>
+				<!--<TextBlock Text="Zing MP3"
+						   FontSize="48" TextAlignment="Center"/>-->
 				<TextBlock Text="Loadding..."
 						   TextAlignment="Center"/>
 				<toolkit:PerformanceProgressBar Height="20"
@@ -43,7 +53,7 @@
 												Background="{StaticResource AccentBrush}" Foreground="{StaticResource AccentBrush}"/>
 			</StackPanel>
 		</Grid>
-		
+
 	</Grid>
- 
+
 </phone:PhoneApplicationPage>

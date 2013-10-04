@@ -13,7 +13,7 @@ namespace ZingMp3.Data.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<MusicItem> musicItemCollection { get; set; }
+        private ObservableCollection<MusicItem> musicItemCollection { get; set; }
 
         private bool _isLoaded;
 
@@ -53,6 +53,9 @@ namespace ZingMp3.Data.ViewModel
             string htmlString = await StaticMethod.GetHttpAsStringGZipAware("link");
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MainPageViewModel()
         {
             _isLoaded = false;

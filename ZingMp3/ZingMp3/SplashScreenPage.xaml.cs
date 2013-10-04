@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using ZingMp3.Data.ViewModel;
 using ZingMp3.Model;
 using ZingMp3.Utilities;
 using ZingMp3.Data;
@@ -30,14 +31,18 @@ namespace ZingMp3
             //StaticData.HtmlString = await StaticMethod.GetHttpAsStringGZipAware("http://mp3.zing.vn/");
             JsonData2 jsonData = new JsonData2();
 
-            jsonData.id = "ZWZ987CC";
+            //jsonData.id = "ZWZ987CC";
 
-            jsonData.t = "song";
+            //jsonData.t = "song";
 
-            StaticData.requestData = StaticMethod.GenerateData(jsonData);
-            StaticData.signature = StaticMethod.Hash_hmac(StaticData.requestData);
+            //StaticData.requestData = StaticMethod.GenerateData(jsonData);
+            //StaticData.signature = StaticMethod.Hash_hmac(StaticData.requestData);
 
-            NavigationService.Navigate(new Uri("/PageGroups/MainGroup/MainPage.xaml", UriKind.Relative));
+            //mainPageViewModel.musicItemCollection = await CallAPI.GetHotContentTask();
+
+            //StaticData.mainPageViewModel.LoadData();
+
+            NavigationService.Navigate(new Uri("/PageGroups/MainGroup/MainPagePanorama.xaml", UriKind.Relative));
         }
     }
 }

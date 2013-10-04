@@ -16,6 +16,12 @@ namespace ZingMp3.PageGroups.MainGroup
         public MainPage()
         {
             InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            LayoutRoot.DataContext = StaticData.mainPageViewModel;
         }
     }
 }

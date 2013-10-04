@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZingMp3.Data.ViewModel;
 
 namespace ZingMp3.Data
 {
@@ -14,5 +15,7 @@ namespace ZingMp3.Data
 
         public static string requestData = "";
         public static string signature = "";
+
+        public static MainPageViewModel mainPageViewModel = new MainPageViewModel();
     }
 }
