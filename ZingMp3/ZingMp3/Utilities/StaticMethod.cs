@@ -91,10 +91,18 @@ namespace ZingMp3.Utilities
             string enc = Convert.ToBase64String(endBuff);
 
             //Convert to URL
-            result = HttpUtility.UrlEncode(enc);
+            if (result.Contains("="))
+            {
+                result = HttpUtility.UrlEncode(enc);
 
-            //Special Translation
-            result = result.Substring(0, result.Length - 6) + "%3D%3D";
+                //Special Translation
+                result = result.Substring(0, result.Length - 6) + "%3D%3D";
+                //result = result + "%3D%3D";
+            }
+            else
+            {
+                result = HttpUtility.UrlEncode(enc);
+            }
 
             return result;
         }

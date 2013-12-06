@@ -104,7 +104,8 @@
       <DependentUpon>ParallaxBackground.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\StaticData.cs" />
-    <Compile Include="Data\ViewModel\MainPageViewModel.cs" />
+    <Compile Include="Data\ViewModel\HotAlbumsViewModel.cs" />
+    <Compile Include="Data\ViewModel\HotSongsViewModel.cs" />
     <Compile Include="Model\DataStructure.cs" />
     <Compile Include="PageGroups\MainGroup\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

@@ -16,6 +16,6 @@ namespace ZingMp3.Data
         public static string requestData = "";
         public static string signature = "";
 
-        public static MainPageViewModel mainPageViewModel = new MainPageViewModel();
+        public static HotSongsViewModel _hotSongsViewModel = new HotSongsViewModel();
     }
 }

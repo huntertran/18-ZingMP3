@@ -21,21 +21,26 @@ namespace ZingMp3.Utilities
             return link;
         }
 
-        public static async Task<ObservableCollection<MusicItem>> GetHotContentTask()
+        /// <summary>
+        /// Get hot songs
+        /// </summary>
+        /// <returns>A collection of music items</returns>
+        public static async Task<JArray> GetHotContentTask(string type)
         {
-            ObservableCollection<MusicItem> resultCollection = new ObservableCollection<MusicItem>();
-
             JsonData1 jsonData = new JsonData1();
-            jsonData.t = "song";
+            jsonData.t = type;
 
             StaticData.requestData = StaticMethod.GenerateData(jsonData);
             StaticData.signature = StaticMethod.Hash_hmac(StaticData.requestData);
 
             string link = LinkBuilder(StaticData.PublicKey, StaticData.signature, StaticData.requestData, "hot-content");
 
-            JObject jObject = JObject.Parse(await StaticMethod.GetHttpAsString(link));
+            string result = await StaticMethod.GetHttpAsString(link);
 
-            return resultCollection;
+            //JObject jObject = JObject.Parse(result);
+            JArray jArray = JArray.Parse(result);
+
+            return jArray;
         }
     }
 }

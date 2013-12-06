@@ -51,6 +51,13 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<DataTemplate x:Key="HotSongsDataTemplate">
+			<Grid>
+				<StackPanel>
+					<TextBlock Text="{Binding Title}"/>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
 	</phone:PhoneApplicationPage.Resources>
 
 	<Grid x:Name="LayoutRoot">
@@ -61,14 +68,24 @@
 			</controls:Panorama.Background>
 
 			<!--Panorama item one-->
-			<controls:PanoramaItem Header="item1">
-				<Grid/>
+			<controls:PanoramaItem Header="hot songs">
+				<Grid>
+					<ListBox x:Name="hotSongsListBox"
+							 ItemsSource="{Binding}"
+							 ItemTemplate="{StaticResource HotSongsDataTemplate}"/>
+				</Grid>
 			</controls:PanoramaItem>
 
 			<!--Panorama item two-->
-			<controls:PanoramaItem Header="item2">
+			<controls:PanoramaItem Header="hot albums">
 				<Grid/>
 			</controls:PanoramaItem>
+
+			<!--Panorama item three-->
+			<controls:PanoramaItem Header="hot videos">
+				<Grid/>
+			</controls:PanoramaItem>
+
 		</controls:Panorama>
 	</Grid>
 

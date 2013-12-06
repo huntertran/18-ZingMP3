@@ -11,176 +11,160 @@ namespace ZingMp3.Model
 {
     public class ArtistDetail
     {
-        public string ArtistId { get; set; }
+        public int ArtistID { get; set; }
         public string ArtistName { get; set; }
+        public string ArtistAvatar { get; set; }
     }
 
-    public class GerneDetail
+    public class GenreDetail
     {
-        public string GerneId { get; set; }
-        public string GerneName { get; set; }
+        public string GenreID { get; set; }
+        public string GenreName { get; set; }
     }
 
     public class BaseItem : INotifyPropertyChanged
     {
-        private string _id;
+        private string _ID;
+        private string _Title;
+        private string _Artist;
+        private List<ArtistDetail> _ArtistDetail;
+        private string _Composer;
+        private string _Genre;
+        private List<GenreDetail> _GenreDetail;
+        private object _OwnerAcc;
+        private string _CreatedDate;
+        private int _TotalListen;
+        private int _Hit;
+        private int _Official;
 
-        private string _title;
+        public string ID
+        {
+            get { return _ID; }
+            set
+            {
+                if (value == _ID) return;
+                _ID = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string _artist;
+        public string Title
+        {
+            get { return _Title; }
+            set
+            {
+                if (value == _Title) return;
+                _Title = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Artist
         {
-            get { return _artist; }
+            get { return _Artist; }
             set
             {
-                if (value == _artist) return;
-                _artist = value;
+                if (value == _Artist) return;
+                _Artist = value;
                 OnPropertyChanged();
             }
         }
 
-        private ArtistDetail _artistDetail;
-
-        private string _gerne;
-
-        public GerneDetail _gerneDetail;
-
-        public string _ownerAcc;
-
-        public string _pictureUrl;
-
-        public string _createdData;
-
-        public string _totalListen;
-
-        public string _hit;
-
-        public string _official;
-
-        /// <summary>
-        /// Song Id
-        /// </summary>
-        public string Id
+        public List<ArtistDetail> ArtistDetail
         {
-            get { return _id; }
+            get { return _ArtistDetail; }
             set
             {
-                if (value == _id) return;
-                _id = value;
+                if (Equals(value, _ArtistDetail)) return;
+                _ArtistDetail = value;
                 OnPropertyChanged();
             }
         }
 
-        /// <summary>
-        /// Song title
-        /// </summary>
-        public string Title
+        public string Composer
         {
-            get { return _title; }
+            get { return _Composer; }
             set
             {
-                if (value == _title) return;
-                _title = value;
+                if (value == _Composer) return;
+                _Composer = value;
                 OnPropertyChanged();
             }
         }
 
-        public ArtistDetail ArtistDetail
+        public string Genre
         {
-            get { return _artistDetail; }
+            get { return _Genre; }
             set
             {
-                if (Equals(value, _artistDetail)) return;
-                _artistDetail = value;
+                if (value == _Genre) return;
+                _Genre = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Gerne
+        public List<GenreDetail> GenreDetail
         {
-            get { return _gerne; }
+            get { return _GenreDetail; }
             set
             {
-                if (value == _gerne) return;
-                _gerne = value;
+                if (Equals(value, _GenreDetail)) return;
+                _GenreDetail = value;
                 OnPropertyChanged();
             }
         }
 
-        public GerneDetail GerneDetail
+        public object OwnerAcc
         {
-            get { return _gerneDetail; }
+            get { return _OwnerAcc; }
             set
             {
-                if (Equals(value, _gerneDetail)) return;
-                _gerneDetail = value;
+                if (Equals(value, _OwnerAcc)) return;
+                _OwnerAcc = value;
                 OnPropertyChanged();
             }
         }
 
-        public string OwnerAcc
+        public string CreatedDate
         {
-            get { return _ownerAcc; }
+            get { return _CreatedDate; }
             set
             {
-                if (value == _ownerAcc) return;
-                _ownerAcc = value;
+                if (value == _CreatedDate) return;
+                _CreatedDate = value;
                 OnPropertyChanged();
             }
         }
 
-        public string PictureUrl
+        public int TotalListen
         {
-            get { return _pictureUrl; }
+            get { return _TotalListen; }
             set
             {
-                if (value == _pictureUrl) return;
-                _pictureUrl = value;
+                if (value == _TotalListen) return;
+                _TotalListen = value;
                 OnPropertyChanged();
             }
         }
 
-        public string CreatedData
+        public int Hit
         {
-            get { return _createdData; }
+            get { return _Hit; }
             set
             {
-                if (value == _createdData) return;
-                _createdData = value;
+                if (value == _Hit) return;
+                _Hit = value;
                 OnPropertyChanged();
             }
         }
 
-        public string TotalListen
+        public int Official
         {
-            get { return _totalListen; }
+            get { return _Official; }
             set
             {
-                if (value == _totalListen) return;
-                _totalListen = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Hit
-        {
-            get { return _hit; }
-            set
-            {
-                if (value == _hit) return;
-                _hit = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Official
-        {
-            get { return _official; }
-            set
-            {
-                if (value == _official) return;
-                _official = value;
+                if (value == _Official) return;
+                _Official = value;
                 OnPropertyChanged();
             }
         }
@@ -197,28 +181,29 @@ namespace ZingMp3.Model
 
     public class MusicItem : BaseItem
     {
-        public string _artistAvatar;
-        public string _mobilePath;
-        public string _linkPlay24;
-        public string _linkPlay128;
-        public string _linkDownload128;
-        public string _linkPlay320;
-        public string _linkDownload320;
-
-        public string _link;
-        public string _lyric;
-        public string _ringtone;
+        private string _ArtistAvatar;
+        private string _MobilePath;
+        private string _LinkPlay24;
+        private string _LinkPlay320;
+        private string _LinkDownload320;
+        private string _LinkPlay128;
+        private string _LinkPlayEmbed;
+        private string _LinkDownload128;
+        private string _Link;
+        private string _LinkHtml5;
+        private string _Lyric;
+        private string _RingTone;
 
         /// <summary>
         /// Ảnh đại diện ca sỹ
         /// </summary>
         public string ArtistAvatar
         {
-            get { return _artistAvatar; }
+            get { return _ArtistAvatar; }
             set
             {
-                if (value == _artistAvatar) return;
-                _artistAvatar = value;
+                if (value == _ArtistAvatar) return;
+                _ArtistAvatar = value;
                 OnPropertyChanged();
             }
         }
@@ -228,11 +213,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string MobilePath
         {
-            get { return _mobilePath; }
+            get { return _MobilePath; }
             set
             {
-                if (value == _mobilePath) return;
-                _mobilePath = value;
+                if (value == _MobilePath) return;
+                _MobilePath = value;
                 OnPropertyChanged();
             }
         }
@@ -242,11 +227,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string LinkPlay24
         {
-            get { return _linkPlay24; }
+            get { return _LinkPlay24; }
             set
             {
-                if (value == _linkPlay24) return;
-                _linkPlay24 = value;
+                if (value == _LinkPlay24) return;
+                _LinkPlay24 = value;
                 OnPropertyChanged();
             }
         }
@@ -256,11 +241,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string LinkPlay128
         {
-            get { return _linkPlay128; }
+            get { return _LinkPlay128; }
             set
             {
-                if (value == _linkPlay128) return;
-                _linkPlay128 = value;
+                if (value == _LinkPlay128) return;
+                _LinkPlay128 = value;
                 OnPropertyChanged();
             }
         }
@@ -270,11 +255,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string LinkDownload128
         {
-            get { return _linkDownload128; }
+            get { return _LinkDownload128; }
             set
             {
-                if (value == _linkDownload128) return;
-                _linkDownload128 = value;
+                if (value == _LinkDownload128) return;
+                _LinkDownload128 = value;
                 OnPropertyChanged();
             }
         }
@@ -284,11 +269,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string LinkPlay320
         {
-            get { return _linkPlay320; }
+            get { return _LinkPlay320; }
             set
             {
-                if (value == _linkPlay320) return;
-                _linkPlay320 = value;
+                if (value == _LinkPlay320) return;
+                _LinkPlay320 = value;
                 OnPropertyChanged();
             }
         }
@@ -298,11 +283,22 @@ namespace ZingMp3.Model
         /// </summary>
         public string LinkDownload320
         {
-            get { return _linkDownload320; }
+            get { return _LinkDownload320; }
             set
             {
-                if (value == _linkDownload320) return;
-                _linkDownload320 = value;
+                if (value == _LinkDownload320) return;
+                _LinkDownload320 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkPlayEmbed
+        {
+            get { return _LinkPlayEmbed; }
+            set
+            {
+                if (value == _LinkPlayEmbed) return;
+                _LinkPlayEmbed = value;
                 OnPropertyChanged();
             }
         }
@@ -312,11 +308,22 @@ namespace ZingMp3.Model
         /// </summary>
         public string Link
         {
-            get { return _link; }
+            get { return _Link; }
             set
             {
-                if (value == _link) return;
-                _link = value;
+                if (value == _Link) return;
+                _Link = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkHtml5
+        {
+            get { return _LinkHtml5; }
+            set
+            {
+                if (value == _LinkHtml5) return;
+                _LinkHtml5 = value;
                 OnPropertyChanged();
             }
         }
@@ -326,11 +333,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string Lyric
         {
-            get { return _lyric; }
+            get { return _Lyric; }
             set
             {
-                if (value == _lyric) return;
-                _lyric = value;
+                if (value == _Lyric) return;
+                _Lyric = value;
                 OnPropertyChanged();
             }
         }
@@ -341,11 +348,11 @@ namespace ZingMp3.Model
         /// </summary>
         public string Ringtone
         {
-            get { return _ringtone; }
+            get { return _RingTone; }
             set
             {
-                if (value == _ringtone) return;
-                _ringtone = value;
+                if (value == _RingTone) return;
+                _RingTone = value;
                 OnPropertyChanged();
             }
         }

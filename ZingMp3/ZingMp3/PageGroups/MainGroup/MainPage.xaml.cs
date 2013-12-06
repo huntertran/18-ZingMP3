@@ -21,7 +21,7 @@ namespace ZingMp3.PageGroups.MainGroup
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            LayoutRoot.DataContext = StaticData.mainPageViewModel;
+            LayoutRoot.DataContext = StaticData._hotSongsViewModel;
         }
     }
 }

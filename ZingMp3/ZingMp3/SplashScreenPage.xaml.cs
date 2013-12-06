@@ -29,7 +29,7 @@ namespace ZingMp3
         async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             //StaticData.HtmlString = await StaticMethod.GetHttpAsStringGZipAware("http://mp3.zing.vn/");
-            JsonData2 jsonData = new JsonData2();
+            //JsonData2 jsonData = new JsonData2();
 
             //jsonData.id = "ZWZ987CC";
 
@@ -41,6 +41,8 @@ namespace ZingMp3
             //mainPageViewModel.musicItemCollection = await CallAPI.GetHotContentTask();
 
             //StaticData.mainPageViewModel.LoadData();
+            //StaticData._hotSongsViewModel = new HotSongsViewModel();
+            await StaticData._hotSongsViewModel.LoadData();
 
             NavigationService.Navigate(new Uri("/PageGroups/MainGroup/MainPagePanorama.xaml", UriKind.Relative));
         }

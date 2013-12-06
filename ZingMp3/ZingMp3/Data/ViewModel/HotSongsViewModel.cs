@@ -5,15 +5,21 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using ZingMp3.Annotations;
 using ZingMp3.Model;
 using ZingMp3.Utilities;
 
 namespace ZingMp3.Data.ViewModel
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class HotSongsViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<MusicItem> musicItemCollection { get; set; }
+        public ObservableCollection<MusicItem> HotSongsCollection
+        {
+            get;
+            set;
+        }
 
         private bool _isLoaded;
 
@@ -30,36 +36,37 @@ namespace ZingMp3.Data.ViewModel
 
         public void AddItem(MusicItem musicItem)
         {
-            musicItemCollection.Add(musicItem);
+            HotSongsCollection.Add(musicItem);
         }
 
         public void RemoveItem(MusicItem musicItem)
         {
-            musicItemCollection.Remove(musicItem);
+            HotSongsCollection.Remove(musicItem);
         }
 
         public void RemoveItemAt(int index)
         {
-            musicItemCollection.RemoveAt(index);
+            HotSongsCollection.RemoveAt(index);
         }
 
         public void UpdateItem(int index, MusicItem musicItem)
         {
-            musicItemCollection[index] = musicItem;
+            HotSongsCollection[index] = musicItem;
         }
 
-        public async void LoadData()
+        public async Task LoadData()
         {
-            string htmlString = await StaticMethod.GetHttpAsStringGZipAware("link");
+            JArray resultArray = await CallAPI.GetHotContentTask("song");
+            HotSongsCollection = resultArray.ToObject<ObservableCollection<MusicItem>>();
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public MainPageViewModel()
+        public HotSongsViewModel()
         {
             _isLoaded = false;
-            musicItemCollection = new ObservableCollection<MusicItem>();
+            HotSongsCollection = new ObservableCollection<MusicItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
