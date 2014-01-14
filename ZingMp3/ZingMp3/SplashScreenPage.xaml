@@ -41,7 +41,7 @@
                     <TextBlock Text="Zing MP3"
                     FontSize="48" TextAlignment="Center"/>
                 -->
-                <TextBlock Text="Loadding..." TextAlignment="Center" />
+                <TextBlock Text="Loading..." TextAlignment="Center" />
                 <ProgressBar x:Name="progressBar"
                              Height="20"
                              Background="{StaticResource AccentBrush}"

@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using ZingMp3.Data;
+using ZingMp3.Utilities;
 
 namespace ZingMp3.PageGroups.MainGroup
 {
@@ -41,7 +42,7 @@ namespace ZingMp3.PageGroups.MainGroup
         {
             if (MessageBox.Show("Do you want to exit?", "Warning!", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                NavigationService.GoBack();
+                StaticMethod.Quit();
             }
             else
             {

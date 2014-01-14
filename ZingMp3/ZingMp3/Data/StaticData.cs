@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZingMp3.Data.ViewModel;
+using ZingMp3.Model;
 
 namespace ZingMp3.Data
 {
@@ -17,5 +18,11 @@ namespace ZingMp3.Data
         public static string signature = "";
 
         public static HotSongsViewModel _hotSongsViewModel = new HotSongsViewModel();
+
+        public static int openCount = 0;
+
+        public static CheckParameterData checkParameterData = new CheckParameterData();
+        public static string appVersion;
+        public static bool EnableAppLink = false;
     }
 }

@@ -372,4 +372,17 @@ namespace ZingMp3.Model
     }
 
     #endregion
+
+    public class CheckParameterData
+    {
+        public string enableSync { get; set; }
+        public string wpapplink { get; set; }
+        public string androidapplink { get; set; }
+        public string iosapplink { get; set; }
+        public string notetouser { get; set; }
+        public string bloglink { get; set; }
+        public string w8applink { get; set; }
+        public string latestVersion { get; set; }
+        public string adMode { get; set; }
+    }
 }

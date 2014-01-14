@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.IO.IsolatedStorage;
+using System.Security.Cryptography;
+using System.Windows;
 using ICSharpCode.SharpZipLib.GZip;
 using System;
 using System.Collections.Generic;
@@ -133,6 +135,13 @@ namespace ZingMp3.Utilities
             result = ByteToString(computedHash);
 
             return result;
+        }
+
+        public static void Quit()
+        {
+            //throw new QuitException();
+            IsolatedStorageSettings.ApplicationSettings.Save();
+            Application.Current.Terminate();
         }
     }
 }
