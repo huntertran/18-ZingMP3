@@ -3,21 +3,20 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-	xmlns:controlsPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls" 
 	x:Class="ZingMp3.PageGroups.MainGroup.MainPagePanorama" 
 	xmlns:customControl="clr-namespace:ZingMp3.CustomControls"
+	xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
 	SupportedOrientations="Portrait"  Orientation="Portrait"
 	shell:SystemTray.IsVisible="False">
 	<phone:PhoneApplicationPage.Resources>
-		<Style x:Key="PanoramaStyle" TargetType="controls:Panorama">
+		<Style x:Key="PanoramaStyle" TargetType="phone:Panorama">
 			<Setter Property="ItemsPanel">
 				<Setter.Value>
 					<ItemsPanelTemplate>
-						<controlsPrimitives:PanoramaPanel x:Name="panel"/>
+						<primitives:PanoramaPanel x:Name="panel"/>
 					</ItemsPanelTemplate>
 				</Setter.Value>
 			</Setter>
@@ -25,13 +24,13 @@
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="Template">
 				<Setter.Value>
-					<ControlTemplate TargetType="controls:Panorama">
+					<ControlTemplate TargetType="phone:Panorama">
 						<Grid>
 							<Grid.RowDefinitions>
 								<RowDefinition Height="auto"/>
 								<RowDefinition Height="*"/>
 							</Grid.RowDefinitions>
-							<controlsPrimitives:PanningBackgroundLayer x:Name="BackgroundLayer" HorizontalAlignment="Left" Grid.RowSpan="2">
+							<primitives:PanningBackgroundLayer x:Name="BackgroundLayer" HorizontalAlignment="Left" Grid.RowSpan="2">
 								<Border x:Name="background" CacheMode="BitmapCache">
 									<Grid>
 										<ContentPresenter ContentTemplate="{StaticResource AppBackgroundTemplate}"/>
@@ -41,11 +40,11 @@
 											   Width="200" Opacity="0.3"/>
 									</Grid>
 								</Border>
-							</controlsPrimitives:PanningBackgroundLayer>
-							<controlsPrimitives:PanningTitleLayer x:Name="TitleLayer" CacheMode="BitmapCache" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" FontSize="187" FontFamily="{StaticResource PhoneFontFamilyLight}" HorizontalAlignment="Left" Margin="10,-76,0,9" Grid.Row="0"/>
-							<controlsPrimitives:PanningLayer x:Name="ItemsLayer" HorizontalAlignment="Left" Grid.Row="1">
+							</primitives:PanningBackgroundLayer>
+							<primitives:PanningTitleLayer x:Name="TitleLayer" CacheMode="BitmapCache" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" FontSize="187" FontFamily="{StaticResource PhoneFontFamilyLight}" HorizontalAlignment="Left" Margin="10,-76,0,9" Grid.Row="0"/>
+							<primitives:PanningLayer x:Name="ItemsLayer" HorizontalAlignment="Left" Grid.Row="1">
 								<ItemsPresenter x:Name="items"/>
-							</controlsPrimitives:PanningLayer>
+							</primitives:PanningLayer>
 						</Grid>
 					</ControlTemplate>
 				</Setter.Value>
@@ -62,31 +61,31 @@
 
 	<Grid x:Name="LayoutRoot">
 
-		<controls:Panorama Title="zing mp3" Style="{StaticResource PanoramaStyle}">
-			<controls:Panorama.Background>
+		<phone:Panorama Title="zing mp3" Style="{StaticResource PanoramaStyle}">
+			<phone:Panorama.Background>
 				<ImageBrush ImageSource="/Assets/Background/connors_hill_panorama-small.jpg"/>
-			</controls:Panorama.Background>
+			</phone:Panorama.Background>
 
 			<!--Panorama item one-->
-			<controls:PanoramaItem Header="hot songs">
+			<phone:PanoramaItem Header="hot songs">
 				<Grid>
 					<ListBox x:Name="hotSongsListBox"
 							 ItemsSource="{Binding}"
 							 ItemTemplate="{StaticResource HotSongsDataTemplate}"/>
 				</Grid>
-			</controls:PanoramaItem>
+			</phone:PanoramaItem>
 
 			<!--Panorama item two-->
-			<controls:PanoramaItem Header="hot albums">
+			<phone:PanoramaItem Header="hot albums">
 				<Grid/>
-			</controls:PanoramaItem>
+			</phone:PanoramaItem>
 
 			<!--Panorama item three-->
-			<controls:PanoramaItem Header="hot videos">
+			<phone:PanoramaItem Header="hot videos">
 				<Grid/>
-			</controls:PanoramaItem>
+			</phone:PanoramaItem>
 
-		</controls:Panorama>
+		</phone:Panorama>
 	</Grid>
 
 </phone:PhoneApplicationPage>
