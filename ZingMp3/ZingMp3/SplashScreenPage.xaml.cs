@@ -28,7 +28,13 @@ namespace ZingMp3
         {
             if (NetworkInterface.GetIsNetworkAvailable())
             {
-                await LoadData();
+
+                try
+                {
+                    await LoadData();
+                }
+                catch (Exception exception)
+                { }
             }
             else
             {

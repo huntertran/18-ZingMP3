@@ -85,21 +85,19 @@ namespace ZingMp3.PageGroups.MainGroup
         private async void HotSongsListBox_OnRefreshRequested(object sender, EventArgs e)
         {
             await StaticData._hotSongsViewModel.LoadData();
-            //hotSongsListBox.ItemsSource = null;
-            //hotSongsListBox.ItemsSource = StaticData._hotSongsViewModel.HotSongsCollection;
-            hotSongsListBox.StopPullToRefreshLoading(true, true);
+            //hotSongsListBox.StopPullToRefreshLoading(true, true);
         }
 
         private async void HotAlbumListBox_OnRefreshRequested(object sender, EventArgs e)
         {
             await StaticData.HotAlbumsViewModel.LoadData();
-            HotAlbumListBox.StopPullToRefreshLoading(true, true);
+            //HotAlbumListBox.StopPullToRefreshLoading(true, true);
         }
 
         private async void HotVideoListBox_OnRefreshRequested(object sender, EventArgs e)
         {
             await StaticData.HotVideosViewModel.LoadData();
-            HotVideoListBox.StopPullToRefreshLoading(true, true);
+            //HotVideoListBox.StopPullToRefreshLoading(true, true);
         }
     }
 }

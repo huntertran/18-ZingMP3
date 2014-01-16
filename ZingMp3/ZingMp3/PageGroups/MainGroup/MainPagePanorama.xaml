@@ -233,7 +233,7 @@
             <!--  Panorama item one  -->
             <phone:PanoramaItem Header="hot songs">
                 <Grid>
-                    <telerikPrimitives:RadDataBoundListBox x:Name="hotSongsListBox"
+                    <!--<telerikPrimitives:RadDataBoundListBox x:Name="hotSongsListBox"
                                                            IsPullToRefreshEnabled="True"
                                                            UseOptimizedManipulationRouting="False"
                                                            ItemTemplate="{StaticResource HotSongsDataTemplate}"
@@ -252,7 +252,11 @@
                                 <Setter Property="RefreshTimeLabelFormat" Value="cập nhật lần cuối lúc: {0:H:mm}"/>
                             </Style>
                         </telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
-                    </telerikPrimitives:RadDataBoundListBox>
+                    </telerikPrimitives:RadDataBoundListBox>-->
+
+                    <ListBox x:Name="hotSongsListBox"
+                             ItemTemplate="{StaticResource HotSongsDataTemplate}"
+                             ItemContainerStyle="{StaticResource ListBoxItemStyle}"/>
 
                 </Grid>
             </phone:PanoramaItem>
@@ -260,7 +264,7 @@
             <!--  Panorama item two  -->
             <phone:PanoramaItem Header="hot albums">
                 <Grid>
-                    <telerikPrimitives:RadDataBoundListBox x:Name="HotAlbumListBox"
+                    <!--<telerikPrimitives:RadDataBoundListBox x:Name="HotAlbumListBox"
                                                            IsPullToRefreshEnabled="True"
                                                            UseOptimizedManipulationRouting="False"
                                                            ItemTemplate="{StaticResource HotAlbumsDataTemplate}"
@@ -279,14 +283,19 @@
                                 <Setter Property="RefreshTimeLabelFormat" Value="cập nhật lần cuối lúc: {0:H:mm}"/>
                             </Style>
                         </telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
-                    </telerikPrimitives:RadDataBoundListBox>
+                    </telerikPrimitives:RadDataBoundListBox>-->
+
+                    <ListBox x:Name="HotAlbumListBox"
+                             ItemTemplate="{StaticResource HotAlbumsDataTemplate}"
+                             ItemContainerStyle="{StaticResource ListBoxItemStyle}"/>
+
                 </Grid>
             </phone:PanoramaItem>
 
             <!--  Panorama item three  -->
             <phone:PanoramaItem Header="hot videos">
                 <Grid>
-                    <telerikPrimitives:RadDataBoundListBox x:Name="HotVideoListBox"
+                    <!--<telerikPrimitives:RadDataBoundListBox x:Name="HotVideoListBox"
                                                            IsPullToRefreshEnabled="True"
                                                            UseOptimizedManipulationRouting="False"
                                                            ItemTemplate="{StaticResource HotVideosDataTemplate}"
@@ -305,7 +314,12 @@
                                 <Setter Property="RefreshTimeLabelFormat" Value="cập nhật lần cuối lúc: {0:H:mm}"/>
                             </Style>
                         </telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
-                    </telerikPrimitives:RadDataBoundListBox>
+                    </telerikPrimitives:RadDataBoundListBox>-->
+
+                    <ListBox x:Name="HotVideoListBox"
+                             ItemTemplate="{StaticResource HotVideosDataTemplate}"
+                             ItemContainerStyle="{StaticResource ListBoxItemStyle}"/>
+
                 </Grid>
             </phone:PanoramaItem>
 
