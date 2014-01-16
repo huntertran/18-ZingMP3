@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using ZingMp3.Annotations;
 using ZingMp3.Model;
 using ZingMp3.Utilities;
 
 namespace ZingMp3.Data.ViewModel
 {
-    public class HotAlbumsViewModel : INotifyPropertyChanged
+    public class HotVideosViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<AlbumItem> HotAlbumsCollection { get; set; }
+        public ObservableCollection<VideoItem> HotVideosCollection { get; set; }
 
         private bool _isLoaded;
 
@@ -30,39 +26,39 @@ namespace ZingMp3.Data.ViewModel
             }
         }
 
-        public void AddItem(AlbumItem albumItem)
+        public void AddItem(VideoItem musicItem)
         {
-            HotAlbumsCollection.Add(albumItem);
+            HotVideosCollection.Add(musicItem);
         }
 
-        public void RemoveItem(AlbumItem albumItem)
+        public void RemoveItem(VideoItem musicItem)
         {
-            HotAlbumsCollection.Remove(albumItem);
+            HotVideosCollection.Remove(musicItem);
         }
 
         public void RemoveItemAt(int index)
         {
-            HotAlbumsCollection.RemoveAt(index);
+            HotVideosCollection.RemoveAt(index);
         }
 
-        public void UpdateItem(int index, AlbumItem albumItem)
+        public void UpdateItem(int index, VideoItem musicItem)
         {
-            HotAlbumsCollection[index] = albumItem;
+            HotVideosCollection[index] = musicItem;
         }
 
         public async Task LoadData()
         {
-            JArray resultArray = await CallAPI.GetHotContentTask("album");
-            HotAlbumsCollection = resultArray.ToObject<ObservableCollection<AlbumItem>>();
+            JArray resultArray = await CallAPI.GetHotContentTask("video");
+            HotVideosCollection = resultArray.ToObject<ObservableCollection<VideoItem>>();
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public HotAlbumsViewModel()
+        public HotVideosViewModel()
         {
             _isLoaded = false;
-            HotAlbumsCollection = new ObservableCollection<AlbumItem>();
+            HotVideosCollection = new ObservableCollection<VideoItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

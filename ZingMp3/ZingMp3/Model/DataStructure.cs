@@ -11,7 +11,7 @@ namespace ZingMp3.Model
 {
     public class ArtistDetail
     {
-        public int ArtistID { get; set; }
+        public string ArtistID { get; set; }
         public string ArtistName { get; set; }
         public string ArtistAvatar { get; set; }
     }
@@ -353,6 +353,62 @@ namespace ZingMp3.Model
             {
                 if (value == _RingTone) return;
                 _RingTone = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public class AlbumItem : BaseItem
+    {
+        public string _PictureURL;
+
+        public string PictureUrl
+        {
+            get { return _PictureURL; }
+            set
+            {
+                if (value == _PictureURL) return;
+                _PictureURL = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public class VideoItem : BaseItem
+    {
+        private string _TotalView;
+        private string _LinkDownload;
+        public string _PictureURL;
+
+        public string TotalView
+        {
+            get { return _TotalView; }
+            set
+            {
+                if (value == _TotalView) return;
+                _TotalView = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkDownload
+        {
+            get { return _LinkDownload; }
+            set
+            {
+                if (value == _LinkDownload) return;
+                _LinkDownload = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string PictureUrl
+        {
+            get { return _PictureURL; }
+            set
+            {
+                if (value == _PictureURL) return;
+                _PictureURL = value;
                 OnPropertyChanged();
             }
         }

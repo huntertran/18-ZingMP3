@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Net.NetworkInformation;
 using Microsoft.Phone.Tasks;
-using ZingMp3.Data.ViewModel;
-using ZingMp3.Model;
+using Microsoft.Xna.Framework.GamerServices;
+using System;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
+using ZingMp3.Data;
 using ZingMp3.Resources;
 using ZingMp3.Settings;
 using ZingMp3.Utilities;
-using ZingMp3.Data;
 
 namespace ZingMp3
 {
@@ -30,24 +22,67 @@ namespace ZingMp3
             this.Loaded += MainPage_Loaded;
         }
 
+
+
         async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //StaticData.HtmlString = await StaticMethod.GetHttpAsStringGZipAware("http://mp3.zing.vn/");
-            //JsonData2 jsonData = new JsonData2();
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
+                await LoadData();
+            }
+            else
+            {
+                IAsyncResult result = Guide.BeginShowMessageBox(
+                    AppResources.SplashScreen_OnNavigatedTo_No_Network,
+                    AppResources.SplashScreen_OnNavigatedTo_No_network_details,
+                    new string[] { "wifi", "3G/4G-LTE" },
+                    0,
+                    MessageBoxIcon.Error,
+                    null,
+                    null
+                    );
+                result.AsyncWaitHandle.WaitOne();
 
-            //jsonData.id = "ZWZ987CC";
+                int? choice = Guide.EndShowMessageBox(result);
+                if (choice.HasValue)
+                {
+                    if (choice.Value == 0)
+                    {
+                        ConnectionSettingsTask con = new ConnectionSettingsTask();
+                        con.ConnectionSettingsType = ConnectionSettingsType.WiFi;
+                        con.Show();
+                    }
+                    else
+                    {
+                        ConnectionSettingsTask con = new ConnectionSettingsTask();
+                        con.ConnectionSettingsType = ConnectionSettingsType.Cellular;
+                        con.Show();
+                    }
+                }
+                else
+                {
+                    MessageBoxResult res = MessageBox.Show(AppResources.SplashScreen_OnNavigatedTo_OfflineModeQuestion, AppResources.SplashScreen_OnNavigatedTo_Offline_Mode,
+                        MessageBoxButton.OKCancel);
+                    if (res == MessageBoxResult.Cancel)
+                    {
+                        StaticMethod.Quit();
+                    }
+                    else if (res == MessageBoxResult.OK)
+                    {
+                        StaticData.isOffline = true;
+                        //Navigate to MainPage
+                        //NavigationService.Navigate(new Uri("/PageGroups/KaraokeGroup/OfflinePage.xaml", UriKind.Relative));
+                    }
+                }
+            }
+        }
 
-            //jsonData.t = "song";
-
-            //StaticData.requestData = StaticMethod.GenerateData(jsonData);
-            //StaticData.signature = StaticMethod.Hash_hmac(StaticData.requestData);
-
-            //mainPageViewModel.musicItemCollection = await CallAPI.GetHotContentTask();
-
-            //StaticData.mainPageViewModel.LoadData();
-            //StaticData._hotSongsViewModel = new HotSongsViewModel();
+        private async Task LoadData()
+        {
+            CountOpen();
+            await CheckParameter();
+            SetupUI();
             await StaticData._hotSongsViewModel.LoadData();
-
             NavigationService.Navigate(new Uri("/PageGroups/MainGroup/MainPagePanorama.xaml", UriKind.Relative));
         }
 
@@ -97,5 +132,57 @@ namespace ZingMp3
             }
         }
 
+        private async Task CheckParameter()
+        {
+            string result = "";
+
+            try
+            {
+                result = await StaticMethod.GetHttpAsString("https://sites.google.com/site/karaokeonlinew8/wp8");
+
+                string[] temp = Regex.Split(result, "~~");
+
+                string latestVersion = Regex.Split(temp[9], ":=")[1];
+
+                StaticData.checkParameterData.latestVersion = latestVersion;
+                StaticData.checkParameterData.enableSync = Regex.Split(temp[1], ":=")[1];
+                StaticData.checkParameterData.wpapplink = Regex.Split(temp[3], ":=")[1];
+                StaticData.checkParameterData.androidapplink = Regex.Split(temp[5], ":=")[1];
+                StaticData.checkParameterData.iosapplink = Regex.Split(temp[7], ":=")[1];
+                StaticData.checkParameterData.notetouser = Regex.Split(temp[11], ":=")[1];
+                StaticData.checkParameterData.bloglink = Regex.Split(temp[13], ":=")[1];
+                StaticData.checkParameterData.w8applink = Regex.Split(temp[15], ":=")[1];
+
+                StaticData.checkParameterData.adMode = Regex.Split(temp[17], ":=")[1];
+
+                StaticData.appVersion = System.Reflection.Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0];
+
+                if (IsHaveNewerVersion(latestVersion, StaticData.appVersion))
+                {
+                    StaticData.EnableAppLink = true;
+                }
+            }
+            catch
+            { }
+        }
+
+        private bool IsHaveNewerVersion(string currentVersion, string appVersion)
+        {
+            var curVer = new Version(currentVersion);
+            var appVer = new Version(appVersion);
+
+            int re = curVer.CompareTo(appVer);
+
+            if (re > 0)
+                return true;
+            return false;
+        }
+
+        private void CountOpen()
+        {
+            StaticData.openCount = ApplicationSettings.GetSetting<int>("openCount", 0);
+            StaticData.openCount++;
+            ApplicationSettings.SetSetting<int>("openCount", StaticData.openCount, true);
+        }
     }
 }

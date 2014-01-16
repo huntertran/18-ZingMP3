@@ -93,7 +93,7 @@ namespace ZingMp3.Utilities
             string enc = Convert.ToBase64String(endBuff);
 
             //Convert to URL
-            if (result.Contains("="))
+            if (enc.Contains("="))
             {
                 result = HttpUtility.UrlEncode(enc);
 

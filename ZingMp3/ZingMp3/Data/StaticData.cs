@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ZingMp3.Data.ViewModel;
+﻿using ZingMp3.Data.ViewModel;
 using ZingMp3.Model;
 
 namespace ZingMp3.Data
@@ -18,6 +14,10 @@ namespace ZingMp3.Data
         public static string signature = "";
 
         public static HotSongsViewModel _hotSongsViewModel = new HotSongsViewModel();
+        public static HotAlbumsViewModel HotAlbumsViewModel = new HotAlbumsViewModel();
+        public static HotVideosViewModel HotVideosViewModel = new HotVideosViewModel();
+
+        public static bool isOffline = false;
 
         public static int openCount = 0;
 

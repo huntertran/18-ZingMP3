@@ -52,8 +52,54 @@ namespace ZingMp3.PageGroups.MainGroup
 
         void MainPagePanorama_Loaded(object sender, RoutedEventArgs e)
         {
-            //LayoutRoot.DataContext = 
             hotSongsListBox.ItemsSource = StaticData._hotSongsViewModel.HotSongsCollection;
+        }
+
+        private async void MainPanorama_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (MainPanorama.SelectedIndex)
+            {
+                case -1:
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    //hot album
+                    if (StaticData.HotAlbumsViewModel.HotAlbumsCollection.Count == 0)
+                    {
+                        await StaticData.HotAlbumsViewModel.LoadData();
+                    }
+                    HotAlbumListBox.ItemsSource = StaticData.HotAlbumsViewModel.HotAlbumsCollection;
+                    break;
+                case 2:
+                    //hot video
+                    if (StaticData.HotVideosViewModel.HotVideosCollection.Count == 0)
+                    {
+                        await StaticData.HotVideosViewModel.LoadData();
+                    }
+                    HotVideoListBox.ItemsSource = StaticData.HotVideosViewModel.HotVideosCollection;
+                    break;
+            }
+        }
+
+        private async void HotSongsListBox_OnRefreshRequested(object sender, EventArgs e)
+        {
+            await StaticData._hotSongsViewModel.LoadData();
+            //hotSongsListBox.ItemsSource = null;
+            //hotSongsListBox.ItemsSource = StaticData._hotSongsViewModel.HotSongsCollection;
+            hotSongsListBox.StopPullToRefreshLoading(true, true);
+        }
+
+        private async void HotAlbumListBox_OnRefreshRequested(object sender, EventArgs e)
+        {
+            await StaticData.HotAlbumsViewModel.LoadData();
+            HotAlbumListBox.StopPullToRefreshLoading(true, true);
+        }
+
+        private async void HotVideoListBox_OnRefreshRequested(object sender, EventArgs e)
+        {
+            await StaticData.HotVideosViewModel.LoadData();
+            HotVideoListBox.StopPullToRefreshLoading(true, true);
         }
     }
 }

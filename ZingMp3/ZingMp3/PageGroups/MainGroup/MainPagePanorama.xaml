@@ -1,12 +1,14 @@
 ﻿<phone:PhoneApplicationPage x:Class="ZingMp3.PageGroups.MainGroup.MainPagePanorama"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:customControl="clr-namespace:ZingMp3.CustomControls"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+                            xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+                            xmlns:dataBoundListBox="clr-namespace:Telerik.Windows.Controls.DataBoundListBox;assembly=Telerik.Windows.Controls.Primitives"
                             Orientation="Portrait"
                             SupportedOrientations="PortraitOrLandscape"
                             d:DesignHeight="800"
@@ -42,7 +44,7 @@
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Bottom"
                                                Canvas.ZIndex="0"
-                                               Opacity="0.3"
+                                               Opacity="0.1"
                                                Source="/Assets/Logo/Logo.png" />
                                     </Grid>
                                 </Border>
@@ -119,12 +121,110 @@
                 </Grid>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="HotAlbumsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Image Source="{Binding PictureUrl}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <StackPanel>
+                        <TextBlock FontSize="25"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Text="{Binding Title}" />
+                        <TextBlock FontSize="18"
+                                   Foreground="{StaticResource PhoneDisabledBrush}"
+                                   Text="{Binding Artist}" />
+                        <TextBlock FontSize="18"
+                                   Foreground="{StaticResource PhoneDisabledBrush}"
+                                   Text="{Binding Genre}" />
+                        <TextBlock FontSize="18"
+                                   FontStyle="Italic"
+                                   Foreground="{StaticResource PhoneDisabledBrush}"
+                                   Text="{Binding TotalListen}"
+                                   TextTrimming="WordEllipsis" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Button x:Name="addButton"
+                            Width="70"
+                            Height="70"
+                            Style="{StaticResource RoundedButton}"
+                            Tag="{Binding}">
+                        <Grid>
+                            <Path Width="20"
+                                  Height="20"
+                                  Margin="0,0,0,0"
+                                  Data="M19.833,0L32.501,0 32.501,19.833999 52.334,19.833999 52.334,32.500999 32.501,32.500999 32.501,52.333 19.833,52.333 19.833,32.500999 0,32.500999 0,19.833999 19.833,19.833999z"
+                                  Fill="{StaticResource PhoneBorderBrush}"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform" />
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="HotVideosDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Image Source="{Binding PictureUrl}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <StackPanel>
+                        <TextBlock FontSize="25"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Text="{Binding Title}" />
+                        <TextBlock FontSize="18"
+                                   Foreground="{StaticResource PhoneDisabledBrush}"
+                                   Text="{Binding Artist}" />
+                        <TextBlock FontSize="18"
+                                   Foreground="{StaticResource PhoneDisabledBrush}"
+                                   Text="{Binding Genre}" />
+                        <TextBlock FontSize="18"
+                                   FontStyle="Italic"
+                                   Foreground="{StaticResource PhoneDisabledBrush}"
+                                   Text="{Binding TotalListen}"
+                                   TextTrimming="WordEllipsis" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Button x:Name="addButton"
+                            Width="70"
+                            Height="70"
+                            Style="{StaticResource RoundedButton}"
+                            Tag="{Binding}">
+                        <Grid>
+                            <Path Width="20"
+                                  Height="20"
+                                  Margin="0,0,0,0"
+                                  Data="M19.833,0L32.501,0 32.501,19.833999 52.334,19.833999 52.334,32.500999 32.501,32.500999 32.501,52.333 19.833,52.333 19.833,32.500999 0,32.500999 0,19.833999 19.833,19.833999z"
+                                  Fill="{StaticResource PhoneBorderBrush}"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform" />
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Grid>
+        </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot">
 
-        <phone:Panorama Title="zing mp3"
+        <phone:Panorama x:Name="MainPanorama"
+                        Title="zing mp3"
                         Canvas.ZIndex="5"
+                        SelectionChanged="MainPanorama_OnSelectionChanged"
                         Style="{StaticResource PanoramaStyle}">
             <phone:Panorama.Background>
                 <ImageBrush ImageSource="/Assets/Background/connors_hill_panorama-small.jpg" />
@@ -133,21 +233,80 @@
             <!--  Panorama item one  -->
             <phone:PanoramaItem Header="hot songs">
                 <Grid>
-                    <ListBox x:Name="hotSongsListBox"
-                             ItemContainerStyle="{StaticResource ListBoxItemStyle}"
-                             ItemTemplate="{StaticResource HotSongsDataTemplate}"
-                             ItemsSource="{Binding}" />
+                    <telerikPrimitives:RadDataBoundListBox x:Name="hotSongsListBox"
+                                                           IsPullToRefreshEnabled="True"
+                                                           UseOptimizedManipulationRouting="False"
+                                                           ItemTemplate="{StaticResource HotSongsDataTemplate}"
+                                                           RefreshRequested="HotSongsListBox_OnRefreshRequested">
+                        <telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                            <telerik:RadMoveAnimation Duration="0:0:0.5"
+                                                      StartPoint="500, 0"
+                                                      EndPoint="0, 0">
+                                <telerik:RadMoveAnimation.Easing>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </telerik:RadMoveAnimation.Easing>
+                            </telerik:RadMoveAnimation>
+                        </telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                        <telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
+                            <Style TargetType="dataBoundListBox:PullToRefreshIndicatorControl">
+                                <Setter Property="RefreshTimeLabelFormat" Value="cập nhật lần cuối lúc: {0:H:mm}"/>
+                            </Style>
+                        </telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
+                    </telerikPrimitives:RadDataBoundListBox>
+
                 </Grid>
             </phone:PanoramaItem>
 
             <!--  Panorama item two  -->
             <phone:PanoramaItem Header="hot albums">
-                <Grid />
+                <Grid>
+                    <telerikPrimitives:RadDataBoundListBox x:Name="HotAlbumListBox"
+                                                           IsPullToRefreshEnabled="True"
+                                                           UseOptimizedManipulationRouting="False"
+                                                           ItemTemplate="{StaticResource HotAlbumsDataTemplate}"
+                                                           RefreshRequested="HotAlbumListBox_OnRefreshRequested">
+                        <telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                            <telerik:RadMoveAnimation Duration="0:0:0.5"
+                                                      StartPoint="500, 0"
+                                                      EndPoint="0, 0">
+                                <telerik:RadMoveAnimation.Easing>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </telerik:RadMoveAnimation.Easing>
+                            </telerik:RadMoveAnimation>
+                        </telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                        <telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
+                            <Style TargetType="dataBoundListBox:PullToRefreshIndicatorControl">
+                                <Setter Property="RefreshTimeLabelFormat" Value="cập nhật lần cuối lúc: {0:H:mm}"/>
+                            </Style>
+                        </telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
+                    </telerikPrimitives:RadDataBoundListBox>
+                </Grid>
             </phone:PanoramaItem>
 
             <!--  Panorama item three  -->
             <phone:PanoramaItem Header="hot videos">
-                <Grid />
+                <Grid>
+                    <telerikPrimitives:RadDataBoundListBox x:Name="HotVideoListBox"
+                                                           IsPullToRefreshEnabled="True"
+                                                           UseOptimizedManipulationRouting="False"
+                                                           ItemTemplate="{StaticResource HotVideosDataTemplate}"
+                                                           RefreshRequested="HotVideoListBox_OnRefreshRequested">
+                        <telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                            <telerik:RadMoveAnimation Duration="0:0:0.5"
+                                                      StartPoint="500, 0"
+                                                      EndPoint="0, 0">
+                                <telerik:RadMoveAnimation.Easing>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </telerik:RadMoveAnimation.Easing>
+                            </telerik:RadMoveAnimation>
+                        </telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                        <telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
+                            <Style TargetType="dataBoundListBox:PullToRefreshIndicatorControl">
+                                <Setter Property="RefreshTimeLabelFormat" Value="cập nhật lần cuối lúc: {0:H:mm}"/>
+                            </Style>
+                        </telerikPrimitives:RadDataBoundListBox.PullToRefreshIndicatorStyle>
+                    </telerikPrimitives:RadDataBoundListBox>
+                </Grid>
             </phone:PanoramaItem>
 
         </phone:Panorama>
