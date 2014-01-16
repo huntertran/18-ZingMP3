@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Windows.Input;
+using Microsoft.Phone.Controls;
+using System;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
 using ZingMp3.Data;
+using ZingMp3.Model;
 using ZingMp3.Utilities;
+using Microsoft.Phone.BackgroundAudio;
 
 namespace ZingMp3.PageGroups.MainGroup
 {
@@ -98,6 +94,24 @@ namespace ZingMp3.PageGroups.MainGroup
         {
             await StaticData.HotVideosViewModel.LoadData();
             //HotVideoListBox.StopPullToRefreshLoading(true, true);
+        }
+
+        private void HotSongGrid_OnTap(object sender, GestureEventArgs e)
+        {
+            MusicItem selectedSong = ((Grid) sender).Tag as MusicItem;
+            AudioTrack newAudioTrack = new AudioTrack(new Uri(selectedSong.LinkPlay320, UriKind.Absolute),
+                selectedSong.Title, selectedSong.Artist,
+                "", new Uri(selectedSong.ArtistAvatar, UriKind.Absolute));
+            BackgroundAudioPlayer.Instance.Track = newAudioTrack;
+            BackgroundAudioPlayer.Instance.Play();
+            //if (PlayState.Playing == BackgroundAudioPlayer.Instance.PlayerState)
+            //{
+            //    BackgroundAudioPlayer.Instance.Pause();
+            //}
+            //else
+            //{
+            //    BackgroundAudioPlayer.Instance.Play();
+            //}
         }
     }
 }

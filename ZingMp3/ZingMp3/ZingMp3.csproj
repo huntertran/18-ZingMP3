@@ -243,7 +243,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AudioPlaybackAgent\AudioPlaybackAgent.csproj">
+      <Project>{29CAF0E1-5EF5-4D37-80F5-A8EDFE844C06}</Project>
+      <Name>AudioPlaybackAgent</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
