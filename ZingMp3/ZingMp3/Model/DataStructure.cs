@@ -193,6 +193,18 @@ namespace ZingMp3.Model
         private string _LinkHtml5;
         private string _Lyric;
         private string _RingTone;
+        private bool _IsPlaying;
+
+        public bool IsPlaying
+        {
+            get { return _IsPlaying; }
+            set
+            {
+                if (value.Equals(_IsPlaying)) return;
+                _IsPlaying = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Ảnh đại diện ca sỹ

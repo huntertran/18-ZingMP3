@@ -144,7 +144,7 @@ namespace ZingMp3
 
             try
             {
-                result = await StaticMethod.GetHttpAsString("https://sites.google.com/site/karaokeonlinew8/wp8");
+                result = await StaticMethod.GetHttpAsString("https://sites.google.com/site/tuantranzingmp3/wp8");
 
                 string[] temp = Regex.Split(result, "~~");
 

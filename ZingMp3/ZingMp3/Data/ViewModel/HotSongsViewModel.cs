@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Linq;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,8 @@ namespace ZingMp3.Data.ViewModel
             get;
             set;
         }
+
+        public int PlayingIndex = -1;
 
         private bool _isLoaded;
 
@@ -54,6 +57,24 @@ namespace ZingMp3.Data.ViewModel
         {
             JArray resultArray = await CallAPI.GetHotContentTask("song");
             HotSongsCollection = resultArray.ToObject<ObservableCollection<MusicItem>>();
+            foreach (MusicItem musicItem in HotSongsCollection)
+            {
+                musicItem.IsPlaying = false;
+            }
+            if (PlayingIndex != -1)
+            {
+                HotSongsCollection[PlayingIndex].IsPlaying = true;
+            }
+        }
+
+        public void SetPlayingIndex(int index)
+        {
+            foreach (MusicItem musicItem in HotSongsCollection)
+            {
+                musicItem.IsPlaying = false;
+            }
+            HotSongsCollection[index].IsPlaying = true;
+            PlayingIndex = index;
         }
 
         /// <summary>

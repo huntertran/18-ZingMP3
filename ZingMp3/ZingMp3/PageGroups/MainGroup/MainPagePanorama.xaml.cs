@@ -58,6 +58,11 @@ namespace ZingMp3.PageGroups.MainGroup
                 case -1:
                     break;
                 case 0:
+                    if (StaticData._hotSongsViewModel.HotSongsCollection.Count == 0)
+                    {
+                        await StaticData._hotSongsViewModel.LoadData();
+                    }
+                    hotSongsListBox.ItemsSource = StaticData._hotSongsViewModel.HotSongsCollection;
                     break;
                 case 1:
                     //hot album
@@ -98,12 +103,15 @@ namespace ZingMp3.PageGroups.MainGroup
 
         private void HotSongGrid_OnTap(object sender, GestureEventArgs e)
         {
+            StaticData._hotSongsViewModel.SetPlayingIndex(hotSongsListBox.SelectedIndex);
+
             MusicItem selectedSong = ((Grid) sender).Tag as MusicItem;
             AudioTrack newAudioTrack = new AudioTrack(new Uri(selectedSong.LinkPlay320, UriKind.Absolute),
                 selectedSong.Title, selectedSong.Artist,
                 "", new Uri(selectedSong.ArtistAvatar, UriKind.Absolute));
             BackgroundAudioPlayer.Instance.Track = newAudioTrack;
             BackgroundAudioPlayer.Instance.Play();
+
             //if (PlayState.Playing == BackgroundAudioPlayer.Instance.PlayerState)
             //{
             //    BackgroundAudioPlayer.Instance.Pause();
