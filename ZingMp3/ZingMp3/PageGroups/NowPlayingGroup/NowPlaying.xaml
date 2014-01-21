@@ -6,9 +6,6 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                            FontSize="{StaticResource PhoneFontSizeNormal}"
-                            Foreground="{StaticResource PhoneForegroundBrush}"
                             Orientation="Portrait"
                             SupportedOrientations="Portrait"
                             shell:SystemTray.BackgroundColor="Transparent"
@@ -27,7 +24,9 @@
 
         <Grid Margin="0,40,0,0">
             <StackPanel Orientation="Horizontal">
-                <controls:RoundButton x:Name="SkipPreButton" Margin="10">
+                <controls:RoundButton x:Name="SkipPreButton"
+                                      Margin="10"
+                                      Tap="SkipPreButton_OnTap">
                     <controls:RoundButton.Content>
                         <Path Width="20"
                               Data="F1M1914.87,1166.52L1914.87,1185.06 1923.04,1180.35 1937.85,1171.8 1937.85,1182.85 1942.18,1180.35 1956.99,1171.8 1956.99,1205.99 1942.18,1197.44 1937.85,1194.94 1937.85,1205.99 1923.04,1197.44 1914.87,1192.73 1914.87,1211.27 1903.62,1211.27 1903.62,1166.52 1914.87,1166.52z"
@@ -36,6 +35,7 @@
                 </controls:RoundButton>
                 <controls:RoundButton x:Name="PauseButton"
                                       Margin="10"
+                                      Tap="PauseButton_OnTap"
                                       Visibility="Collapsed">
                     <controls:RoundButton.Content>
                         <Path Width="20"
@@ -43,19 +43,36 @@
                               Stretch="Uniform" />
                     </controls:RoundButton.Content>
                 </controls:RoundButton>
-                <controls:RoundButton x:Name="PlayButton" Margin="10">
+                <controls:RoundButton x:Name="PlayButton"
+                                      Margin="10"
+                                      Tap="PlayButton_OnTap">
                     <controls:RoundButton.Content>
                         <Path Width="20"
                               Data="F1 M1188.2,1715.23 L1169.93,1728.57 L1151.66,1741.9 L1151.66,1715.23 L1151.66,1688.57 L1169.93,1701.9 L1188.2,1715.23 z"
                               Stretch="Uniform" />
                     </controls:RoundButton.Content>
                 </controls:RoundButton>
-                <controls:RoundButton x:Name="SkipNext" Margin="10">
+                <controls:RoundButton x:Name="SkipNext"
+                                      Margin="10"
+                                      Tap="SkipNext_OnTap">
                     <controls:RoundButton.Content>
                         <Path Width="20"
-                              Stretch="Uniform" Data="M42.1116,0 L53.362,0 L53.362,44.75 L42.1116,44.75 L42.1116,26.2101 L33.9412,30.9301 L19.1406,39.48 L19.1406,28.4301 L14.8005,30.9301 L0,39.48 L0,5.28003 L14.8005,13.8301 L19.1406,16.3301 L19.1406,5.28003 L33.9412,13.8301 L42.1116,18.55 z" />
+                              Data="M42.1116,0 L53.362,0 L53.362,44.75 L42.1116,44.75 L42.1116,26.2101 L33.9412,30.9301 L19.1406,39.48 L19.1406,28.4301 L14.8005,30.9301 L0,39.48 L0,5.28003 L14.8005,13.8301 L19.1406,16.3301 L19.1406,5.28003 L33.9412,13.8301 L42.1116,18.55 z"
+                              Stretch="Uniform" />
                     </controls:RoundButton.Content>
                 </controls:RoundButton>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock x:Name="SongNameTextBLock" Text="SongNameTextBlock" />
+                <TextBlock x:Name="ArtistTextBlock" Text="ArtistTextBlock" />
+                <TextBlock x:Name="GenreTextBlock" Text="GenreTextBlock" />
             </StackPanel>
         </Grid>
 

@@ -234,6 +234,7 @@
     </Content>
     <Content Include="Assets\Background\connors_hill_panorama-small.jpg" />
     <Content Include="Assets\Background\dummy.png" />
+    <Content Include="Assets\Icon\play.png" />
     <Content Include="Assets\Logo\500x250.png" />
     <Content Include="Assets\Logo\Logo.png" />
     <Content Include="Assets\Logo\logo_Zingmp3_big.png" />
