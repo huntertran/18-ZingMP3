@@ -121,5 +121,22 @@ namespace ZingMp3.PageGroups.MainGroup
             //    BackgroundAudioPlayer.Instance.Play();
             //}
         }
+
+        private void ApplicationBar_StateChanged(object sender, Microsoft.Phone.Shell.ApplicationBarStateChangedEventArgs e)
+        {
+            if (e.IsMenuVisible)
+            {
+                ApplicationBar.Opacity = 0.7;
+            }
+            else
+            {
+                ApplicationBar.Opacity = 1;
+            }
+        }
+
+        private void NowPlayingApplicationBarIconButton_OnClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PageGroups/NowPlayingGroup/NowPlaying.xaml", UriKind.Relative));
+        }
     }
 }

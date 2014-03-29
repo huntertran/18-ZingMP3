@@ -1,4 +1,5 @@
-﻿using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.BackgroundAudio;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Net.NetworkInformation;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.GamerServices;
@@ -135,6 +136,19 @@ namespace ZingMp3
                         //ApplicationSettings.SetSetting<bool>("hasReview", true, true);
                     }
                 }
+            }
+        }
+
+        private void SetupPlaylist()
+        {
+            BackgroundAudioPlayer.Instance.PlayStateChanged += InstanceOnPlayStateChanged;
+        }
+
+        private void InstanceOnPlayStateChanged(object sender, EventArgs eventArgs)
+        {
+            if (BackgroundAudioPlayer.Instance.Track != null)
+            {
+                ApplicationSettings.SetSettingSafe("currentSong", BackgroundAudioPlayer.Instance.Track, true);
             }
         }
 

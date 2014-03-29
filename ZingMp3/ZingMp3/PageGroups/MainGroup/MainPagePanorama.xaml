@@ -234,10 +234,12 @@
     <Grid x:Name="LayoutRoot">
 
         <phone:Panorama x:Name="MainPanorama"
-                        Title="zing mp3"
                         Canvas.ZIndex="5"
                         SelectionChanged="MainPanorama_OnSelectionChanged"
                         Style="{StaticResource PanoramaStyle}">
+            <phone:Panorama.Title>
+                <TextBlock Text="zing mp3"/>
+            </phone:Panorama.Title>
             <phone:Panorama.Background>
                 <ImageBrush ImageSource="/Assets/Background/connors_hill_panorama-small.jpg" />
             </phone:Panorama.Background>
@@ -349,8 +351,9 @@
                               IsMenuEnabled="True"
                               IsVisible="True"
                               Mode="Minimized"
-                              Opacity="0.5">
-            <shell:ApplicationBarIconButton IconUri="/Assets/Icon/play.png" Text="now playing" />
+                              Opacity="1" StateChanged="ApplicationBar_StateChanged">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icon/play.png" Text="now playing" 
+                                            x:Name="NowPlayingApplicationBarIconButton" Click="NowPlayingApplicationBarIconButton_OnClick"/>
             <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2" />-->
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1" />
